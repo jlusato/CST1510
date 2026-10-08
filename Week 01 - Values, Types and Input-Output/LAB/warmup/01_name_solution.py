@@ -5,7 +5,8 @@
 
 print(record_ID) """
 
-#The problem with the original syntax is the defined variable is different from the declared variable. Python is very case sensitive and because the syntax had "ID" instead of "id" python couldn't recognise it.
+#The problem with the original syntax is the defined variable is different from the declared variable. 
+# Python is very case sensitive and because the syntax had "ID" instead of "id" python couldn't recognise it.
 
 # we can fix this by using the correct declared variable as it was declared as below
 
