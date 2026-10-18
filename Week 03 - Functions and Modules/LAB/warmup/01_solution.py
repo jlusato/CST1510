@@ -1,4 +1,4 @@
-def status_of(percent, warning_at):
+def status_of(percent, warning_at=90):
     if percent >= 100:
         return "OVER LIMIT"
     elif percent >= warning_at:
