@@ -2,82 +2,61 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
+Name  :  Julius Paul Lusato
+Lane  :  IT     
 Date  :
 
-Run it:   python template.py
-
-Work through the numbered sections in order. Each one tells you what it must do.
-Delete these instructions as you replace them with your code.
 """
 
-# =================================================================== FUNCTIONS
-# 1. Write a function called status_of(percent) that returns "OVER LIMIT"
-#    (100% or more), "WARNING" (90% or more), or "OK" (anything else).
-#
-#    Typical and above: also write check(value, limit) that returns the
-#    difference and the percentage as two values - do not print anything
-#    inside it, only calculate and return.
-#
-#    Excellent: also write print_report(label, value, limit, difference,
-#    percent, status) that does ALL of the printing below - nothing outside
-#    it should contain a print() of its own.
-#
-#    Give each function a one-line docstring saying what it does.
+def status_of(percent):
+    """Returns "OVERLIMIT", "WARNING" OR "OK" based on the variable "percent" """
+    if percent >= 100:
+        return "OVER LIMIT"
+    elif percent >= 90:
+        return "WARNING"
+    else:
+        return "OK"
 
-# your function(s) go here
+def check(value, limit):
+    """Returns difference and percent based on the variables "value" and "limit" """
+    difference = limit - value
+    percent = (value / limit) * 100
+    return difference, percent ; 
 
+def print_report(label, value, limit, difference, percent, status):
+    """Prints the report check record for one record"""
 
-# ==================================================================== INPUT
-# 2. Ask for your three values.
-#
-#    - the first is TEXT      (a name, a hostname, an IP)  -> no conversion needed
-#    - the second is a NUMBER (use float(), not int())
-#    - the third  is a NUMBER (use float(), not int())
+    print()
+    print("=" * 34)
+    print(f"  RECORD CHECK  -  {label}")
+    print("=" * 34)
 
-label = ""      # replace with an input() call
-value = 0.0     # replace with an input() call, converted
-limit = 0.0     # replace with an input() call, converted
+    print(f"  {'Used':<14}: {value:>10.2f}")
+    print(f"  {'Total':<14}: {limit:>10.2f}")
+    print(f"  {'Free':<14}: {difference:>10.2f}")
+    print(f"  {'Percent':<14}: {percent:>9.2f}%")
+    print(f"  {'Status':<14}: {status:>10}")
 
-
-# ================================================================== PROCESS
-# 3. Work out the difference, the percentage, and the status.
-#
-#    Threshold : call status_of() to get the status. Work out the
-#                difference and percentage inline, not in a function.
-#    Typical   : call check() to get the difference and percentage instead.
-
-difference = 0.0   # replace with your code
-percent = 0.0       # replace with your code
-status = ""          # replace with your code
+    print("=" * 34)
 
 
-# =================================================================== OUTPUT
-# 4. Print the report.
-#
-#    Threshold : the three values you were given, plus status, inside a border
-#    Typical   : add difference and percent, 2 decimal places, right-aligned
-#    Excellent : call print_report() instead of printing directly here, and
-#                wrap sections 2-4 in a loop so you can check as many records
-#                as you like in one run - type "quit" as the label to stop.
-#                Keep count of how many came back OVER LIMIT and print that
-#                once, after the loop ends.
+over_limit = 0
 
-print()
-print("=" * 34)
-print(f"  RECORD CHECK  -  {label}")
-print("=" * 34)
+while True:
+    label = input("Hostname (OR 'quit' to stop): ")
+    if label == "quit":
+        break
 
-# your report lines go here
+    value = float(input("Enter a value: "))
+    limit = float(input("Enter the limit: "))
 
-print("=" * 34)
+    difference, percent = check(value, limit)
+    status = status_of(percent)
 
+    print_report(label, value, limit, difference, percent, status)
 
-# ==========================================================================
-# 5. Before you finish:
-#
-#    [ ] Run it three times with different numbers
-#    [ ] Run it with a total of 0 and note the error (do not fix it yet)
-#    [ ] Check every function does one job - if a function both calculates
-#        and prints, split it
+    if status == "OVER LIMIT":
+        over_limit += 1
+
+print(f"Records over limit: {over_limit}")
+
